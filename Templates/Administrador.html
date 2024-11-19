@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador - Administración de Productos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Enlace al archivo CSS personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Administrador.css') }}">
+
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="title">
+            <i class="fas fa-boxes"></i> Administración
+        </div>
+        <div class="user-menu" onclick="toggleDropdown()">
+            <span>
+                <i class="fas fa-user"></i> Bienvenido, {{ session['username'] }} <i class="fas fa-caret-down"></i>
+            </span>            
+            <div class="dropdown-menu">
+                <a href="#" onclick="logout()">Cerrar Sesión</a>
+            </div>
+        </div>        
+    </div>
+ 
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Productos</h2>
+            <!-- Botón para abrir el modal de registro de producto -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+
+            <form method="GET" action="{{ url_for('administrador') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar productos..." value="{{ request.args.get('search', '') }}">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
+        </div>
+
+        <table id="productosTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Código</th>
+                    <th>Stock</th>
+                    <th>Oferta</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.id_producto }}</td>
+                    <td>{{ producto.nombre_producto }}</td>
+                    <td>${{ producto.precio_producto }}</td>
+                    <td>{{ producto.codigo_producto }}</td>
+                    <td>{{ producto.stock_producto }}</td>
+                    <td>{{ 'Sí' if producto.oferta_producto else 'No' }}</td>
+                    <td>{{ producto.nombre_categoria }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ producto.id_producto }}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="btn btn-warning btn-sm" data-id="{{ producto.id_producto }}" onclick="editProduct(this)" data-bs-toggle="modal" data-bs-target="#editarModal">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   <!-- Modal de Registro -->
+   <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registroModalLabel">Registrar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registroForm" method="POST" enctype="multipart/form-data" action="{{ url_for('administrador') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.nombre_producto.label(class="form-label") }}
+                        {{ form.nombre_producto(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.descripcion_producto.label(class="form-label") }}
+                        {{ form.descripcion_producto(class="form-control") }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            {{ form.precio_producto.label(class="form-label") }}
+                            {{ form.precio_producto(class="form-control") }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.codigo_producto.label(class="form-label") }}
+                            {{ form.codigo_producto(class="form-control") }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.stock_producto.label(class="form-label") }}
+                            {{ form.stock_producto(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.informacion_adicional.label(class="form-label") }}
+                        {{ form.informacion_adicional(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.imagen_producto.label(class="form-label") }}
+                        {{ form.imagen_producto(class="form-control", onchange="previewImage(event)") }}
+                        <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
+                    </div>
+                    <div class="mb-3">
+                        <img id="imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{ form.oferta_producto(class="form-check-input") }}
+                        {{ form.oferta_producto.label(class="form-check-label") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.id_categoria.label(class="form-label") }}
+                        {{ form.id_categoria(class="form-control") }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal de Registro -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">Registrar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registroForm" method="POST" enctype="multipart/form-data" action="{{ url_for('administrador') }}">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.nombre_producto.label(class="form-label") }}
+                            {{ form.nombre_producto(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.descripcion_producto.label(class="form-label") }}
+                            {{ form.descripcion_producto(class="form-control") }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {{ form.precio_producto.label(class="form-label") }}
+                                {{ form.precio_producto(class="form-control") }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.codigo_producto.label(class="form-label") }}
+                                {{ form.codigo_producto(class="form-control") }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.stock_producto.label(class="form-label") }}
+                                {{ form.stock_producto(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.informacion_adicional.label(class="form-label") }}
+                            {{ form.informacion_adicional(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.imagen_producto.label(class="form-label") }}
+                            {{ form.imagen_producto(class="form-control", onchange="previewImage(event)") }}
+                            <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
+                        </div>
+                        <div class="mb-3">
+                            <img id="imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.oferta_producto(class="form-check-input") }}
+                            {{ form.oferta_producto.label(class="form-check-label") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.id_categoria.label(class="form-label") }}
+                            {{ form.id_categoria(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edición -->
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarForm" method="POST" enctype="multipart/form-data" action="">
+                        {{ form.hidden_tag() }}
+                        <input type="hidden" id="editar_product_id" name="product_id">
+                        <div class="mb-3">
+                            {{ form.nombre_producto.label(class="form-label") }}
+                            {{ form.nombre_producto(class="form-control", id="editar_nombre_producto") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.descripcion_producto.label(class="form-label") }}
+                            {{ form.descripcion_producto(class="form-control", id="editar_descripcion_producto") }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {{ form.precio_producto.label(class="form-label") }}
+                                {{ form.precio_producto(class="form-control", id="editar_precio_producto") }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.codigo_producto.label(class="form-label") }}
+                                {{ form.codigo_producto(class="form-control", id="editar_codigo_producto") }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.stock_producto.label(class="form-label") }}
+                                {{ form.stock_producto(class="form-control", id="editar_stock_producto") }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.informacion_adicional.label(class="form-label") }}
+                            {{ form.informacion_adicional(class="form-control", id="editar_informacion_adicional") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.imagen_producto.label(class="form-label") }}
+                            {{ form.imagen_producto(class="form-control", id="editar_imagen_producto", onchange="previewImageEdit(event)") }}
+                            <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
+                        </div>
+                        <div class="mb-3">
+                            <img id="editar_imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.oferta_producto(class="form-check-input", id="editar_oferta_producto") }}
+                            {{ form.oferta_producto.label(class="form-check-label") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.id_categoria.label(class="form-label") }}
+                            {{ form.id_categoria(class="form-control", id="editar_id_categoria") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de confirmación de eliminación -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este producto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form id="deleteForm" method="POST" action="{{ url_for('eliminar_producto') }}">
+                        <input type="hidden" name="product_id" id="productToDelete">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    
+    <!-- JS Administrador.js -->
+    <script src="{{ url_for('static', filename='js/Administrador.js') }}"></script>
+</body>
+</html>

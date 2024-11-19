@@ -1,0 +1,179 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+}
+
+.header {
+    background-color: #00796b;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid #004d40;
+}
+
+.header .title {
+    font-size: 1.5em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.header .title i {
+    margin-right: 10px;
+}
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.user-menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+    min-width: 150px;
+    z-index: 1;
+}
+
+.user-menu .dropdown-menu a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9em;
+}
+
+.user-menu .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilos para el formulario en el modal */
+.modal-content {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    font-weight: 500;
+    color: #00796b;
+}
+
+.modal-body {
+    padding-top: 0;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: #00796b;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #005a4f;
+}
+
+.btn-close {
+    outline: none;
+}
+
+/* Checkbox de oferta */
+.form-check-label {
+    color: #00796b;
+    font-weight: 500;
+}
+
+/* Limita el texto con puntos suspensivos */
+.table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 65px; /* Ajusta según tus necesidades */
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .header .title {
+        font-size: 1.2em;
+    }
+
+    .user-menu {
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .form-control {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .table td {
+        max-width: 100px; /* Ajuste para que el contenido sea más visible en pantallas pequeñas */
+    }
+}
+
+/* Media Query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .header .title {
+        font-size: 1em;
+    }
+
+    .user-menu .dropdown-menu {
+        min-width: 100px;
+    }
+
+    .btn-primary {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    .modal-content {
+        padding: 10px;
+    }
+
+    .form-label {
+        font-size: 0.9em;
+    }
+
+    .table td {
+        font-size: 0.8em;
+    }
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Famco - Artículos Médicos Especializados - Contactanos</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon_.png" rel="icon" type="image/x-icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Libraries Stylesheet -->
+        <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">        
+       
+        <!-- Customized Bootstrap Stylesheet -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <!-- Enlace al archivo CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        
+            <!-- Navbar start -->
+            <div class="container-fluid fixed-top">
+                <div class="container topbar bg-white d-none d-lg-block">
+                    <div class="d-flex justify-content-center">
+                        <div class="top-info">
+                            <div class="social-icons text-center">
+                                <a href="https://www.facebook.com/famco.articulosmedicos/?locale=es_LA" target="_blank" class="mx-3 text-secondary">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@ghidalgo2023" target="_blank" class="mx-3 text-secondary">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                                <a href="https://www.instagram.com/famcoartmedicos/" target="_blank" class="mx-3 text-secondary">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.youtube.com" target="_blank" class="mx-3 text-secondary">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container px-0">
+                    <nav class="navbar navbar-light bg-white navbar-expand-xl" style="right:17px;">
+                        <a href="index.html" class="navbar-brand d-flex align-items-center">
+                            <img src="{{ url_for('static', filename='images/Logo_Famco.png') }}" alt="Logo Famco" class="logo-img">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                            <div class="navbar-nav mx-auto">
+                                <a href="{{ url_for('index') }}" class="nav-item nav-link me-5">Inicio</a>
+                                <a href="{{ url_for('productos') }}" class="nav-item nav-link me-5">Productos</a>
+                                <a href="{{ url_for('contacto') }}" class="nav-item nav-link active me-5">Contacto</a>
+                            </div>
+                            <div class="d-flex m-3 me-0">
+                                <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                    <i class="fas fa-search" style="color: #023e72;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Contacto</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="{{ url_for('index') }}">Inicio</a></li>
+                <li class="breadcrumb-item active text-white">Contacto</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Contact Start -->
+        <div class="container-fluid contact py-5">
+            <div class="container py-5">
+                <div class="p-5 bg-light rounded">
+                    <div class="row g-4">
+                        <!-- Título y descripción -->
+                        <div class="col-12">
+                            <div class="text-center mx-auto" style="max-width: 700px;">
+                                <h1 class="text-primary">Necesitas más información, envíanos un correo</h1>
+                            </div>
+                        </div>
+
+                       <!-- Inicio de formulario de contacto -->
+                        <div class="col-lg-6 contact">
+                            <form action="/contacto" method="POST">
+                                <div class="row">
+                                    <div class="col-6 mb-4">
+                                        <input type="text" name="nombre" class="form-control border-1 py-2" placeholder="Nombre" required>
+                                    </div>
+                                    <div class="col-6 mb-4">
+                                        <input type="email" name="correo" class="form-control border-1 py-2" placeholder="Correo" required>
+                                    </div>
+                                </div>
+                                <input type="text" name="asunto" class="form-control border-1 py-2 mb-4" placeholder="Asunto" required>
+                                <textarea name="mensaje" class="form-control border-1 py-2 mb-3" rows="7" placeholder="Mensaje" required></textarea>
+                                <button type="submit" class="banner-btn btn btn-sm border-1 border-dark rounded-pill text-white px-3 py-2">Enviar</button>
+                            </form>
+                        </div>
+                        <!-- Fin de formulario de contacto -->
+
+
+                        <!-- Información de contacto y mapa -->
+                        <div class="col-lg-6" style="padding-left: 50px;">
+                            <div>
+                                <h3 class="text-dark mb-3">Contactos</h3>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-map-marker-alt fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0">Dirección</h6>
+                                        <p class="mb-0">Calle Del Rocio 130-Local B, Jardines del Moral, 37160, Leon, Gto</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-envelope fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0">Correo</h6>
+                                        <p class="mb-0">contacto@famcoarticulosmedicos.com.mx</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <i class="fab fa-whatsapp fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0">WhatsApp</h6>
+                                        <p class="mb-0">477 182 8356</p>
+                                        <p class="mb-0">477 268 4544</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <i class="fa-solid fa-phone fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0">Telefono</h6>
+                                        <p class="mb-0">477 688 8123</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-4">
+                                    <i class="fa-solid fa-phone fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0">Telefono de Urgencias</h6>
+                                        <p class="mb-0">477 380 6226</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <iframe class="rounded w-100" 
+                            style="height: 250px; border:0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2028.9940429744738!2d-101.6870199763833!3d21.144773634364217!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf4120855555%3A0xb3691961785185a4!2sEdge%20%26%20Cloud!5e0!3m2!1ses!2smx!4v1730237219322!5m2!1ses!2smx" 
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid text-white-50 footer pt-3 mt-5"style="background-color: #00162A">
+            <div class="container py-4">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgb(255, 255, 255)">
+                    <div class="row g-5">
+                        <div class="col-lg-6 text-center">
+                        <a href="index.html" class="align-items-center pt-3">
+                            <img src="{{ url_for('static', filename='images/logo_famco_b.png') }}" style="max-width: 100%" alt="Logo Famco" class="logo-img"/></a>
+                        </div>
+                        <div class="col-lg-6">
+                        <div class="d-flex justify-content-center pt-3">
+                            <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-item">
+                        <h4 class="text-white mb-3">Ubicación</h4>
+                        <p class="mb-4">
+                            Calle Del Rocio 130-Local B, Jardines del Moral, 37160, Leon, Gto.
+                        </p>
+                        <iframe class="rounded w-100" 
+                            style="height: 250px; border:0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2028.9940429744738!2d-101.6870199763833!3d21.144773634364217!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf4120855555%3A0xb3691961785185a4!2sEdge%20%26%20Cloud!5e0!3m2!1ses!2smx!4v1730237219322!5m2!1ses!2smx" 
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <!-- <a href="" class="btn border-light py-2 px-4 rounded-pill text-light">Read More</a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-white mb-3">Acceso Directos</h4>
+                            <a class="btn-link" href="{{ url_for('index') }}">Inicio</a>
+                            <a class="btn-link" href="{{ url_for('productos') }}">Productos</a>
+                            <a class="btn-link" href="{{ url_for('contacto') }}">Contactanos</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-3">Contacto</h4>
+                            <p>Email: contacto@famcoarticulosmedicos.com.mx</p>
+                            <p>WhatsApp: 477 688 8123</p>
+                            <p>Pagos que aceptamos</p>
+                            <img src="{{ url_for('static', filename='images/payment.png') }}" class="img-fluid" alt=""/>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4" style="background-color: #00101E;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <span class="text-light">
+                            <a href="#"><i class="fas fa-copyright text-light me-2"></i>Famco</a>, Todos los derechos reservados
+                        </span>
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-end text-white">
+                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                        Designed By
+                        <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        <a class="border-bottom" href="https://edgecloud.com.mx">/ Edge & Cloud</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+
+        <!-- Back to Top -->
+        <a href="#top" class="btn border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+     
+    <!-- Scripts de lib -->
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/lightbox/js/lightbox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    
+     <!-- Scripts Main.js -->
+     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>
