@@ -1,4 +1,4 @@
-from flask_mysqldb import MySQL 
+from flask_mysqldb import MySQL  # type: ignore
 
 def init_db(app):
     app.config['MYSQL_HOST'] = 'localhost'

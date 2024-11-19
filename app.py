@@ -6,6 +6,7 @@ from datetime import timedelta
 from config_db import init_db
 from config_mail import send_email
 
+#Base de 64 para guardar archivos
 import base64
 
 
