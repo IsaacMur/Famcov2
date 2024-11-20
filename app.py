@@ -285,6 +285,48 @@ def ver_productos():
     return render_template('productos.html', productos=productos)
 
 
+# Metodo para filtrado de productos
+# @app.route('/productos', methods=['GET'])
+# def productos():
+#     # Obtener los filtros de la solicitud
+#     categoria = request.args.get('categoria')
+#     precio_min = request.args.get('precio_min', type=float)
+#     precio_max = request.args.get('precio_max', type=float)
+#     ordenar = request.args.get('ordenar')
+
+#     # Construir la consulta SQL con filtros
+#     query = "SELECT * FROM productos WHERE 1=1"
+#     params = []
+
+#     if categoria:
+#         query += " AND categoria = %s"
+#         params.append(categoria)
+
+#     if precio_min is not None:
+#         query += " AND precio_producto >= %s"
+#         params.append(precio_min)
+
+#     if precio_max is not None:
+#         query += " AND precio_producto <= %s"
+#         params.append(precio_max)
+
+#     if ordenar == "precio_asc":
+#         query += " ORDER BY precio_producto ASC"
+#     elif ordenar == "precio_desc":
+#         query += " ORDER BY precio_producto DESC"
+#     elif ordenar == "nombre_asc":
+#         query += " ORDER BY nombre_producto ASC"
+#     elif ordenar == "nombre_desc":
+#         query += " ORDER BY nombre_producto DESC"
+
+#     # Ejecutar la consulta
+#     cursor = mysql.connection.cursor()
+#     cursor.execute(query, params)
+#     productos = cursor.fetchall()
+
+#     # Renderizar la página con los productos filtrados
+#     return render_template('productos.html', productos=productos)
+
 # Ejecutar la aplicación
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

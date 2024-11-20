@@ -128,4 +128,35 @@ class ProductDAO:
         for producto in productos:
             producto['imagen_base64'] = base64.b64encode(producto['imagen_producto']).decode('utf-8') if producto['imagen_producto'] else None
         return productos
+    
+    
+    # # Metodo para filtrado de productos
+    # def get_filtered_products(self, categoria=None, precio_min=None, precio_max=None, ordenar=None):
+    #     query = "SELECT * FROM productos WHERE 1=1"
+    #     params = []
+
+    #     if categoria:
+    #         query += " AND categoria = %s"
+    #         params.append(categoria)
+
+    #     if precio_min is not None:
+    #         query += " AND precio_producto >= %s"
+    #         params.append(precio_min)
+
+    #     if precio_max is not None:
+    #         query += " AND precio_producto <= %s"
+    #         params.append(precio_max)
+
+    #     if ordenar == "precio_asc":
+    #         query += " ORDER BY precio_producto ASC"
+    #     elif ordenar == "precio_desc":
+    #         query += " ORDER BY precio_producto DESC"
+    #     elif ordenar == "nombre_asc":
+    #         query += " ORDER BY nombre_producto ASC"
+    #     elif ordenar == "nombre_desc":
+    #         query += " ORDER BY nombre_producto DESC"
+
+    #     cursor = self.db_connection.cursor()
+    #     cursor.execute(query, params)
+    #     return cursor.fetchall()
 

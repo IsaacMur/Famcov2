@@ -37,3 +37,9 @@ class ProductCQRS:
     # Metodo para mostrar solo los productos que estan en oferta
     def get_products_in_offer(self):
         return self.product_dao.get_products_in_offer()
+    
+    # # Metodo para filtrado de productos
+    # def get_filtered_products(self, categoria, precio_min, precio_max, ordenar):
+    #     productos = self.product_dao.get_filtered_products(categoria, precio_min, precio_max, ordenar)
+    #     # Transformar los datos si es necesario
+    #     return productos
