@@ -54,13 +54,15 @@ class ProductViewModel:
                 producto['imagen_base64'] = None
         return productos
     
-    # Metodo para filtrado de productos
-    # def get_filtered_products(self, filtros):
-    #     categoria = filtros.get('categoria')
-    #     precio_min = filtros.get('precio_min', type=float)
-    #     precio_max = filtros.get('precio_max', type=float)
-    #     ordenar = filtros.get('ordenar')
-
-    #     return self.product_cqrs.get_filtered_products(categoria, precio_min, precio_max, ordenar)
     
+    # Metodo para filtrado de productos
+    def get_filtered_products(self, filtros, orden):
+        # Mapear el filtro de 'nombre' a 'nombre_producto'
+        filtros_mapeados = {
+            'nombre_producto': filtros.get('nombre'),
+            'precio_min': filtros.get('precio_min'),
+            'precio_max': filtros.get('precio_max'),
+            'categoria': filtros.get('categoria')
+        }
+        return self.product_cqrs.get_filtered_products(filtros_mapeados, orden)
    

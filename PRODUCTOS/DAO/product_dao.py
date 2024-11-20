@@ -130,33 +130,44 @@ class ProductDAO:
         return productos
     
     
-    # # Metodo para filtrado de productos
-    # def get_filtered_products(self, categoria=None, precio_min=None, precio_max=None, ordenar=None):
-    #     query = "SELECT * FROM productos WHERE 1=1"
-    #     params = []
+    # Metodo para filtrado de productos
+    def get_filtered_products(self, nombre_producto=None, precio_min=None, precio_max=None, categoria=None, orden='nombre_producto'):
+        # Lista de columnas válidas para ordenar
+        columnas_validas = ['nombre_producto', 'precio_producto', 'nombre_categoria']
 
-    #     if categoria:
-    #         query += " AND categoria = %s"
-    #         params.append(categoria)
+        # Validar que el campo de orden esté en la lista de columnas válidas
+        if orden not in columnas_validas:
+            orden = 'nombre_producto'  # Valor por defecto
 
-    #     if precio_min is not None:
-    #         query += " AND precio_producto >= %s"
-    #         params.append(precio_min)
+        # Construir consulta dinámica
+        query = """
+        SELECT p.*, c.nombre_categoria
+        FROM productos p
+        JOIN categoria c ON p.id_categoria = c.id_categoria
+        WHERE 1=1
+        """
+        params = []
 
-    #     if precio_max is not None:
-    #         query += " AND precio_producto <= %s"
-    #         params.append(precio_max)
+        # Aplicar filtros dinámicamente
+        if nombre_producto:
+            query += " AND p.nombre_producto LIKE %s"
+            params.append(f"%{nombre_producto}%")
+        if precio_min is not None:
+            query += " AND p.precio_producto >= %s"
+            params.append(precio_min)
+        if precio_max is not None:
+            query += " AND p.precio_producto <= %s"
+            params.append(precio_max)
+        if categoria:
+            query += " AND c.nombre_categoria = %s"
+            params.append(categoria)
 
-    #     if ordenar == "precio_asc":
-    #         query += " ORDER BY precio_producto ASC"
-    #     elif ordenar == "precio_desc":
-    #         query += " ORDER BY precio_producto DESC"
-    #     elif ordenar == "nombre_asc":
-    #         query += " ORDER BY nombre_producto ASC"
-    #     elif ordenar == "nombre_desc":
-    #         query += " ORDER BY nombre_producto DESC"
+        # Añadir cláusula ORDER BY con una columna válida
+        query += f" ORDER BY {orden}"
 
-    #     cursor = self.db_connection.cursor()
-    #     cursor.execute(query, params)
-    #     return cursor.fetchall()
-
+        # Ejecutar la consulta
+        cursor = self.mysql.connection.cursor()
+        cursor.execute(query, params)
+        productos = cursor.fetchall()
+        cursor.close()
+        return productos

@@ -110,10 +110,10 @@
 
                         <!-- Flechas de navegación arriba pero al final -->
                         <div class="mt-3" style="text-align: end;">
-                            <button class="btn btn-primary border-secondary me-2" id="prevProduct">
+                            <button class="btn btn-primary me-2" id="prevProduct">
                                 <i class="fa fa-chevron-left"></i>
                             </button>
-                            <button class="btn btn-primary border-secondary me-2" id="nextProduct">
+                            <button class="btn btn-primary me-2" id="nextProduct">
                                 <i class="fa fa-chevron-right"></i>
                             </button>
                         </div>
@@ -139,459 +139,88 @@
                                     <h6 class="descripcion-producto text-muted">Marca: Delamarca</h6>
                                     <!-- Precio y botón al final -->
                                     <div class="mt-auto d-flex justify-content-between align-items-center">
-                                        <p class="text-dark fs-5 fw-bold mb-0">${{ producto.precio_producto }}</p>
+                                        <p class="text-primary fs-5 fw-bold mb-2 text-center">${{ producto.precio_producto }}</p>
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
+
+                   <!-- Contenedor principal -->
+        <div class="row g-4">
+            <!-- Barra de filtros -->
+            <div class="col-lg-3">
+                <div class="filter-section p-4 bg-light rounded shadow-sm">
+                    <h4 class="mb-4 text-primary">Filtrar Productos</h4>
                     
+                    <!-- Categorías -->
+                    <div class="mb-4">
+                        <h5 class="mb-3 fw-bold text-secondary">Categorías</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Medicamentos (3)</a></li>
+                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Equipos Médicos (5)</a></li>
+                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Cuidado Personal (2)</a></li>
+                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Prevención (8)</a></li>
+                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Nutrición y Bienestar (5)</a></li>
+                        </ul>
+                    </div>
                     
-                    <!-- <!-- Productos Start
-                    <div class="col-lg-12">
-                        <h1 class=" fw-bold mb-0 text-center" style="padding: 25px;">Productos</h1>
-                        <div class="row g-4">
-                            <div class="col-6"></div>
-                            <div class="col-xl-3">
-                               
+                    <!-- Rango de precios -->
+                    <div class="mb-4">
+                        <h5 class="mb-3 fw-bold text-secondary">Precio</h5>
+                        <label for="minPrice" class="form-label">Mínimo</label>
+                        <input type="number" class="form-control mb-2" id="minPrice" placeholder="0">
+                        <label for="maxPrice" class="form-label">Máximo</label>
+                        <input type="number" class="form-control" id="maxPrice" placeholder="500">
+                        <button class="btn btn-primary mt-3 w-100">Aplicar</button>
+                    </div>
+                    
+                    <!-- Marcas -->
+                    <div class="mb-4">
+                        <h5 class="mb-3 fw-bold text-secondary">Marcas</h5>
+                        <ul class="list-unstyled">
+                            <li><input type="checkbox" id="brand1"> <label for="brand1" class="ms-2">Casio (10)</label></li>
+                            <li><input type="checkbox" id="brand2"> <label for="brand2" class="ms-2">Rolex (7)</label></li>
+                            <li><input type="checkbox" id="brand3"> <label for="brand3" class="ms-2">Fossil (5)</label></li>
+                            <li><input type="checkbox" id="brand4"> <label for="brand4" class="ms-2">Seiko (3)</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos -->
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    {% for producto in productos %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-primary rounded">
+                            <!-- Imagen del producto -->
+                            <img src="data:image/jpeg;base64,{{ producto.imagen_base64 }}" class="card-img-top img-fluid rounded-top" alt="{{ producto.nombre_producto }}">
+                            
+                            <!-- Etiqueta de oferta -->
+                            {% if producto.oferta_producto %}
+                            <div class="badge bg-danger text-white position-absolute top-0 end-0 m-2 px-3 py-2">
+                                Oferta
                             </div>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-lg-3">
-                                <div class="row g-4">
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h4>Categoría</h4>
-                                            <ul class="list-unstyled fruite-categorie small-text">
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-pills me-2"></i>Medicamentos</a>
-                                                        <span>(3)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-stethoscope me-2"></i>Equipos Médicos</a>
-                                                        <span>(5)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-heartbeat me-2"></i>Productos de Cuidado personal</a>
-                                                        <span>(2)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-shield-virus me-2"></i>Productos de Prevención</a>
-                                                        <span>(8)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="#"><i class="fas fa-seedling me-2"></i>Productos de Nutrición y Bienestar</a>
-                                                        <span>(5)</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>                                    
-                                    <!-- <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h4 class="mb-2">Precio</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
-                                            <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
-                                        </div>
-                                    </div> 
-                                    <div class="col-lg-12 small-text">
-                                        <div class="mb-3">
-                                            <h4 class="small-title">Medicamentos</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1">Medicamentos con receta</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Medicamentos de venta libre(OCT)</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Suplementos vitamícos y nutricionales</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-12 small-text">
-                                        <div class="mb-3">
-                                            <h4 class="small-title">Equipos Médicos</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1"> Instrumentos médicos</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Equipos para el cuidado en casa</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Dispositivos médicos</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 small-text">
-                                        <div class="mb-3">
-                                            <h4 class="small-title">Productos de cuidado personal</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1"> Productos de higiene personal</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Cuidado de heridas</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Productos ortopedicos</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 small-text">
-                                        <div class="mb-3">
-                                            <h4 class="small-title">Productos de prevención</h4>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                                <label for="Categories-1"> Mascarillas, guantes y otros</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                                <label for="Categories-2"> Desinfectantes y anticepticos</label>
-                                            </div>
-                                            <div class="mb-2">
-                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                                <label for="Categories-3"> Prubas rápidas de la salud</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>  -->
-
-                            <!-- Productos estaticos -->
-                            <div class="col-lg-9">
-                                <div class="row g-4 justify-content-center">
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                      
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6 col-lg-6 col-xl-4">
-                                        <div class="border border-primary rounded position-relative fruite-item">
-                                            <a href="{{ url_for('detalle_producto') }}">
-                                                <div class="fruite-img">
-                                                    <img src="{{ url_for('static', filename='images/product_1.jpg') }}" class="img-fluid w-100 rounded-top" alt="Paracetamol">
-                                                </div>
-                                            </a>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Medicamento</div>
-                                            <div class="p-4 border border-top-0 rounded-bottom">
-                                                <!-- Enlace solo alrededor del título -->
-                                                <a href="{{ url_for('detalle_producto') }}" target="_blank" class="text-decoration-none text-dark">
-                                                    <h4>Paracetamol</h4>
-                                                </a>
-                                                <p class="small-description">Medicamento utilizado para aliviar el dolor leve a moderado y reducir la fiebre. Ideal en el tratamiento de resfriados y gripes.</p>
-                                                <p class="text-dark fs-5 fw-bold mb-2 text-center">$20.00 / unidad</p>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control text-center me-2" style="width: 60px;">
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary small-text">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                       
-
-                                    <div class="col-12">
-                                        <div class="pagination d-flex justify-content-center mt-5">
-                                            <a href="#" class="rounded">&laquo;</a>
-                                            <a href="#" class="active rounded">1</a>
-                                            <a href="#" class="rounded">2</a>
-                                            <a href="#" class="rounded">3</a>
-                                            <a href="#" class="rounded">4</a>
-                                            <a href="#" class="rounded">5</a>
-                                            <a href="#" class="rounded">6</a>
-                                            <a href="#" class="rounded">&raquo;</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            {% endif %}
+                            
+                            <!-- Contenido -->
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate">{{ producto.nombre_producto }}</h5>
+                                <p class="card-text text-muted small">{{ producto.descripcion_producto }}</p>
+                                <h6 class="text-muted">Marca: {{ producto.marca or "Sin marca" }}</h6>
+                                <p class="text-success fw-bold fs-5">${{ producto.precio_producto }}</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Productos End -->
-
+                    {% endfor %}
                 </div>
             </div>
         </div>
+    </div>
+</div>
+</div>
         <!-- Prodcutos End-->
 
         
