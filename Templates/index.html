@@ -114,36 +114,31 @@
 
         <!-- Modal Cart Start -->
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            
-
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tu carrito</h5>
+                        <h3 class="modal-title text-center" id="exampleModalLabel">Tu carrito</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex align-items-center">
                         <table class="table">
                             <thead>
-                                <th scope="col">#</th>
-                                <th scope="col">Imagen</th>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Eliminar</th>
+                                <th class="col-num">#</th>
+                                <th class="col-imagen">Imagen</th>
+                                <th class="col-producto">Producto</th>
+                                <th class="col-cantidad">Cantidad</th>
+                                <th class="col-precio">Precio</th>
+                                <th class="col-eliminar">Eliminar</th>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
+                                    <th scope="row">1</th>
                                     <td><img src="../static/images/avatar.jpg" alt=""></td>
                                     <td>Vendas</td>
                                     <td>
-                                        <input 
-                                          type="number" 
-                                          value="2" 
-                                          min="1" 
-                                          style="width: 50px; text-align: center;" 
-                                          onchange="updateTotal(this)">
+                                        <div class="col-md-2 quantity">
+                                            <input id="quantity" type="number" value ="1" min="1" class="form-control quantity-input">
+                                        </div>
                                     </td>
                                     <td>$100.00</td>
                                     <td>
@@ -153,16 +148,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
+                                    <th scope="row">1</th>
                                     <td><img src="../static/images/avatar.jpg" alt=""></td>
                                     <td>Vendas</td>
                                     <td>
-                                        <input 
-                                          type="number" 
-                                          value="2" 
-                                          min="1" 
-                                          style="width: 50px; text-align: center;" 
-                                          onchange="updateTotal(this)">
+                                        <div class="col-md-2 quantity">
+                                            <input id="quantity" type="number" value ="1" min="1" class="form-control quantity-input">
+                                        </div>
                                     </td>
                                     <td>$100.00</td>
                                     <td>
@@ -172,16 +164,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
+                                    <th scope="row">1</th>
                                     <td><img src="../static/images/avatar.jpg" alt=""></td>
                                     <td>Vendas</td>
                                     <td>
-                                        <input 
-                                          type="number" 
-                                          value="2" 
-                                          min="1" 
-                                          style="width: 50px; text-align: center;" 
-                                          onchange="updateTotal(this)">
+                                        <div class="col-md-2 quantity">
+                                            <input id="quantity" type="number" value ="1" min="1" class="form-control quantity-input">
+                                        </div>
                                     </td>
                                     <td>$100.00</td>
                                     <td>
@@ -199,10 +188,9 @@
                             Continuar
                         </a>
                         <hr>
-                        <h5 class="text-center">El pago de envio es por su cuenta</h5>
+                        <h6 class="text-center">El pago de envio es por su cuenta</h6>
                     </div>
-                </div>
-                
+                </div> 
             </div>
         </div>
         <!-- Modal Cart End -->
