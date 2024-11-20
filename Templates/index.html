@@ -79,8 +79,11 @@
                             <a href="{{ url_for('contacto') }}" class="nav-item nav-link me-5">Contacto</a>
                         </div>
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <!-- <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
                                 <i class="fas fa-search" style="color: #023e72;"></i>
+                            </button> -->
+                            <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#cartModal">
+                                <i class="fa-solid fa-cart-shopping" style="color: #023e72;"></i>
                             </button>
                         </div>
                     </div>
@@ -91,11 +94,11 @@
 
 
         <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Buscador</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex align-items-center">
@@ -106,8 +109,104 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Modal Search End -->
+
+        <!-- Modal Cart Start -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            
+
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tu carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <table class="table">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Eliminar</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="../static/images/avatar.jpg" alt=""></td>
+                                    <td>Vendas</td>
+                                    <td>
+                                        <input 
+                                          type="number" 
+                                          value="2" 
+                                          min="1" 
+                                          style="width: 50px; text-align: center;" 
+                                          onchange="updateTotal(this)">
+                                    </td>
+                                    <td>$100.00</td>
+                                    <td>
+                                        <button class="btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;">
+                                            <i class="fa-solid fa-trash" style="color: #ee0000;"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="../static/images/avatar.jpg" alt=""></td>
+                                    <td>Vendas</td>
+                                    <td>
+                                        <input 
+                                          type="number" 
+                                          value="2" 
+                                          min="1" 
+                                          style="width: 50px; text-align: center;" 
+                                          onchange="updateTotal(this)">
+                                    </td>
+                                    <td>$100.00</td>
+                                    <td>
+                                        <button class="btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;">
+                                            <i class="fa-solid fa-trash" style="color: #ee0000;"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="../static/images/avatar.jpg" alt=""></td>
+                                    <td>Vendas</td>
+                                    <td>
+                                        <input 
+                                          type="number" 
+                                          value="2" 
+                                          min="1" 
+                                          style="width: 50px; text-align: center;" 
+                                          onchange="updateTotal(this)">
+                                    </td>
+                                    <td>$100.00</td>
+                                    <td>
+                                        <button class="btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;">
+                                            <i class="fa-solid fa-trash" style="color: #ee0000;"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-body" style="text-align: center; margin-top: 20px;">
+                        <a href="https://wa.me/524772205721/?text=Hola,%20quisiera%20más%20información%20sobre%20las%20capacitaciones." class="banner-btn btn btn-sm border-1 border-secondary rounded-pill text-secondary px-5 py-3">
+                            <i class="fa-brands fa-whatsapp text-primary"></i>
+                            Continuar
+                        </a>
+                        <hr>
+                        <h5 class="text-center">El pago de envio es por su cuenta</h5>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Modal Cart End -->
+
 
         <!-- Hero Start -->
         <div class="container-fluid py-5 mb-5 hero-header">
