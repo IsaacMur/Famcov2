@@ -581,7 +581,7 @@
 
 /* Cart Start */
 .col-num{
-    width: 15x;
+    width: 5%;
 }
 
 .col-imagen{
@@ -593,13 +593,13 @@
 }
 
 .col-cantidad{
-    width: 30%;
+    width: 25%;
 }
 
 .col-precio{
-    width: 10%;
+    width: 20%;
 }
 
 .col-eliminar{
-    width: 10%;
+    width: 5%;
 }
