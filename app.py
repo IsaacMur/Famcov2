@@ -91,6 +91,8 @@ def productos():
     return render_template('productos.html', productos=productos_oferta)
 
 
+
+
 # Metodo para filtrar productos
 @app.route('/filtrado')
 def filtrado_de_productos():

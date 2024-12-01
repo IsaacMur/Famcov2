@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #e0f7fa;
+    background-color: #f0f0f0d8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@ body {
 .login-container h1 {
     font-size: 1.5em;
     margin-bottom: 20px;
-    color: #00796b;
+    color: #03A65A ;
 }
 .form-control {
     border-radius: 20px;
@@ -27,7 +27,7 @@ body {
     font-size: 1em;
 }
 .btn-login {
-    background-color: #00796b;
+    background-color: #03A65A ;
     border: none;
     width: 100%;
     border-radius: 20px;
@@ -37,5 +37,5 @@ body {
     transition: all 0.3s;
 }
 .btn-login:hover {
-    background-color: #004d40;
+    background-color: #03A65A ;
 }

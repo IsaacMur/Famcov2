@@ -5,13 +5,13 @@ body {
 }
 
 .header {
-    background-color: #00796b;
+    background-color: #03A65A;
     color: #ffffff;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid #004d40;
+    border-bottom: 5px solid #004d27;
 }
 
 .header .title {
@@ -73,7 +73,7 @@ body {
 
 .modal-title {
     font-weight: 500;
-    color: #00796b;
+    color: #03A65A;
 }
 
 .modal-body {
@@ -92,13 +92,13 @@ body {
 }
 
 .btn-primary {
-    background-color: #00796b;
+    background-color: #03A65A;
     border: none;
     border-radius: 5px;
 }
 
 .btn-primary:hover {
-    background-color: #005a4f;
+    background-color: #03A65A ;
 }
 
 .btn-close {
@@ -107,7 +107,7 @@ body {
 
 /* Checkbox de oferta */
 .form-check-label {
-    color: #00796b;
+    color: #03A65A;
     font-weight: 500;
 }
 

@@ -13,7 +13,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body>    
+    <nav class="navbar navbar-light fixed-top">
+        <div class="container-fluid">
+            <a href="{{ url_for('index') }}" class="ms-2 btn align-items-center" style="background-color: #03A65A ; color: white;">
+                <i class="fa fa-sign-out-alt me-2"></i> Inicio
+            </a>
+        </div>
+    </nav>    
+
     <div class="login-container">
         <h1>LOGIN</h1>
         <form id="loginForm">
