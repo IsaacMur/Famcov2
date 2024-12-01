@@ -580,3 +580,26 @@
 
 
 /* Cart Start */
+.col-num{
+    width: 5%;
+}
+
+.col-imagen{
+    width: 5%;
+}
+
+.col-producto{
+    width: 40%;
+}
+
+.col-cantidad{
+    width: 25%;
+}
+
+.col-precio{
+    width: 20%;
+}
+
+.col-eliminar{
+    width: 5%;
+}
