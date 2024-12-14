@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Famco - Artículos Médicos Especializados - Producto</title>
+        <title>Famco - Artículos Médicos Especializados - Detalle producto</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -65,7 +65,7 @@
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl" style="right:17px;">
                     <a href="{{ url_for('index') }}" class="navbar-brand d-flex align-items-center">
-                        <img src="img/logo_famco.png" alt="Logo Famco" class="logo-img">
+                        <img src="{{ url_for('static', filename='images/Logo_Famco.png') }}" alt="Logo Famco" class="logo-img">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -74,11 +74,14 @@
                         <div class="navbar-nav mx-auto">
                             <a href="{{ url_for('index') }}" class="nav-item nav-link me-5">Inicio</a>
                             <a href="{{ url_for('productos') }}" class="nav-item nav-link me-5">Productos</a>
-                            <a href="{{ url_for('contacto') }}" class="nav-item nav-link active me-5">Contacto</a>
+                            <a href="{{ url_for('contacto') }}" class="nav-item nav-link me-5">Contacto</a>
                         </div>
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                <i class="fas fa-search" style="color: #023e72;"></i>
+                            <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4 position-relative" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#cartModal">
+                                <i class="fa-solid fa-cart-shopping" style="color: #023e72;"></i>
+                                <span id="cartItemCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    0
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -87,31 +90,11 @@
         </div>
         <!-- Navbar End -->
 
-
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Search End -->
-
         <!-- Single Product Start -->
         <div class="container-fluid py-5 justify-content-center">
             <div class="container d-flex flex-column align-items-start mb-5" style="padding-top: 130px;">
-                <a href="/shop.html" class="btn btn-primary rounded-pill px-3 py-1 mb-4" style="font-size: 0.9rem;">
-                    <i class="fa fa-arrow-left me-1"></i>Volver
+                <a href="{{ url_for('productos') }}" class="border border-secondary btn align-items-center rounded-pill px-4 py-2 mb-4" style="background-color: #03A65A ; color: white; font-size: 0.9rem;">
+                    <i class="fa fa-arrow-left me-1"></i> Volver
                 </a>
                 <div class="container py-5">
                     <div class="row g-4 mb-5 justify-content-center" >
@@ -174,124 +157,6 @@
                                             <p>Color: Azul</p>
                                             <p>Uso: Desechable</p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <h1 class="fw-bold mb-0">Más productos</h1>
-                    <div class="vesitable">
-                        <div class="owl-carousel vegetable-carousel justify-content-center">
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Parsely</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Parsely</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_2.jpg" class="img-fluid w-100 rounded-top bg-light" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Banana</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Bell Papper</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Potatoes</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Parsely</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Potatoes</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border border-primary rounded position-relative vesitable-item">
-                                <div class="vesitable-img">
-                                    <img src="img/product_3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                                <div class="p-4 pb-0 rounded-bottom">
-                                    <h4>Potatoes</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                     </div>
                                 </div>
                             </div>

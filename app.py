@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify # type: ignore
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, abort # type: ignore
 from flask_wtf import FlaskForm # type: ignore
 from wtforms import StringField, PasswordField, FloatField, TextAreaField, IntegerField, BooleanField, SelectField, FileField, SubmitField # type: ignore
 from wtforms.validators import DataRequired, Regexp # type: ignore
@@ -68,8 +68,8 @@ class ProductForm(FlaskForm):
     precio_producto = FloatField('Precio', validators=[DataRequired()])
     codigo_producto = IntegerField('Código del Producto', validators=[DataRequired()])
     stock_producto = IntegerField('Stock', validators=[DataRequired()])
-    informacion_adicional = TextAreaField('Información Adicional')
-    imagen_producto = FileField('Imagen del Producto')
+    informacion_adicional = TextAreaField('Información Adicional', validators=[DataRequired()])
+    imagen_producto = FileField('Imagen del Producto', validators=[DataRequired()])
     oferta_producto = BooleanField('Producto en oferta')
     id_categoria = SelectField('Categoría', coerce=int, validators=[DataRequired()])
     submit = SubmitField('Registrar')
@@ -89,7 +89,6 @@ def productos():
     # Obtiene solo los productos en oferta
     productos_oferta = product_view_model.get_products_in_offer()
     return render_template('productos.html', productos=productos_oferta)
-
 
 
 
@@ -114,7 +113,6 @@ def filtrado_de_productos():
         vista=vista,
         orden=orden
     )
-
 
 
 # Ruta para la página de contacto y enviio de correos
@@ -309,6 +307,18 @@ def obtener_producto(product_id):
 def ver_productos():
     productos = product_view_model.get_all_products()
     return render_template('productos.html', productos=productos)
+
+
+# Función para obtener el producto por ID
+def obtener_producto_por_id(producto_id):
+    return product_view_model.get_product_by_id(producto_id)
+
+@app.route('/detalle_producto/<int:producto_id>')
+def mostrar_detalle_producto(producto_id):  # Cambia el nombre de la función
+    producto = obtener_producto_por_id(producto_id)
+    if not producto:
+        abort(404)  # Retornar un error 404 si el producto no existe
+    return render_template('detalle_producto.html', producto=producto)
 
 
 

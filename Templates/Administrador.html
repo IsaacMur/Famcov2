@@ -32,22 +32,22 @@
             </div>        
         </div>
 
- 
-    <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2><strong>Productos</strong></h2>
-            <!-- Botón para abrir el modal de registro de producto -->
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
-                <i class="fas fa-plus"></i> Agregar Producto
-            </button>
+    
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2><strong>Productos</strong></h2>
+                <!-- Botón para abrir el modal de registro de producto -->
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </button>
 
-            <form method="GET" action="{{ url_for('administrador') }}" class="mb-3">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar productos..." value="{{ request.args.get('search', '') }}">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-            </form>
-        </div>
+                <form method="GET" action="{{ url_for('administrador') }}" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Buscar productos..." value="{{ request.args.get('search', '') }}">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
+            </div>
 
         <table id="productosTable" class="table table-striped">
             <thead>
@@ -86,65 +86,67 @@
         </table>
     </div>
 
-   <!-- Modal de Registro -->
-   <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registroModalLabel">Registrar Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="registroForm" method="POST" enctype="multipart/form-data" action="{{ url_for('administrador') }}">
-                    {{ form.hidden_tag() }}
-                    <div class="mb-3">
-                        {{ form.nombre_producto.label(class="form-label") }}
-                        {{ form.nombre_producto(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.descripcion_producto.label(class="form-label") }}
-                        {{ form.descripcion_producto(class="form-control") }}
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            {{ form.precio_producto.label(class="form-label") }}
-                            {{ form.precio_producto(class="form-control") }}
+        <!-- Modal de Registro -->
+        <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">Registrar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registroForm" method="POST" enctype="multipart/form-data" action="{{ url_for('administrador') }}">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.nombre_producto.label(class="form-label") }}
+                            {{ form.nombre_producto(class="form-control") }}
                         </div>
-                        <div class="col-md-4 mb-3">
-                            {{ form.codigo_producto.label(class="form-label") }}
-                            {{ form.codigo_producto(class="form-control") }}
+                        <div class="mb-3">
+                            {{ form.descripcion_producto.label(class="form-label") }}
+                            {{ form.descripcion_producto(class="form-control") }}
                         </div>
-                        <div class="col-md-4 mb-3">
-                            {{ form.stock_producto.label(class="form-label") }}
-                            {{ form.stock_producto(class="form-control") }}
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {{ form.precio_producto.label(class="form-label") }}
+                                {{ form.precio_producto(class="form-control", type="number", step="1") }}
+                            </div>                            
+                            <div class="col-md-4 mb-3">
+                                {{ form.codigo_producto.label(class="form-label") }}
+                                {{ form.codigo_producto(class="form-control") }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ form.stock_producto.label(class="form-label") }}
+                                {{ form.stock_producto(class="form-control") }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        {{ form.informacion_adicional.label(class="form-label") }}
-                        {{ form.informacion_adicional(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.imagen_producto.label(class="form-label") }}
-                        {{ form.imagen_producto(class="form-control", onchange="previewImage(event)") }}
-                        <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
-                    </div>
-                    <div class="mb-3">
-                        <img id="imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
-                    </div>
-                    <div class="mb-3 form-check">
-                        {{ form.oferta_producto(class="form-check-input") }}
-                        {{ form.oferta_producto.label(class="form-check-label") }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form.id_categoria.label(class="form-label") }}
-                        {{ form.id_categoria(class="form-control") }}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </form>
+                        <div class="mb-3">
+                            {{ form.informacion_adicional.label(class="form-label") }}
+                            {{ form.informacion_adicional(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.imagen_producto.label(class="form-label") }}
+                            {{ form.imagen_producto(class="form-control", accept="image/*", onchange="previewImage(event)") }}
+                            <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <img id="imagePreview" src="" alt="Vista previa de la imagen" style="max-width: 100%; max-height: 200px; display: none;">
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.oferta_producto(class="form-check-input") }}
+                            {{ form.oferta_producto.label(class="form-check-label") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.id_categoria.label(class="form-label") }}
+                            {{ form.id_categoria(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
     <!-- Modal de Registro -->
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
@@ -185,7 +187,7 @@
                         </div>
                         <div class="mb-3">
                             {{ form.imagen_producto.label(class="form-label") }}
-                            {{ form.imagen_producto(class="form-control", onchange="previewImage(event)") }}
+                            {{ form.imagen_producto(class="form-control", accept="image/*", onchange="previewImage(event)") }}
                             <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
                         </div>
                         <div class="mb-3">
@@ -246,7 +248,7 @@
                         </div>
                         <div class="mb-3">
                             {{ form.imagen_producto.label(class="form-label") }}
-                            {{ form.imagen_producto(class="form-control", id="editar_imagen_producto", onchange="previewImageEdit(event)") }}
+                            {{ form.imagen_producto(class="form-control", accept="image/*", id="editar_imagen_producto", onchange="previewImageEdit(event)") }}
                             <small class="form-text text-muted">Seleccione una imagen para ver la vista previa.</small>
                         </div>
                         <div class="mb-3">

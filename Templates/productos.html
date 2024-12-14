@@ -77,8 +77,11 @@
                                 <a href="{{ url_for('contacto') }}" class="nav-item nav-link  me-5">Contacto</a>
                             </div>
                             <div class="d-flex m-3 me-0">
-                                <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                    <i class="fas fa-search" style="color: #023e72;"></i>
+                                <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4 position-relative" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#cartModal">
+                                    <i class="fa-solid fa-cart-shopping" style="color: #023e72;"></i>
+                                    <span id="cartItemCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        0
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -88,6 +91,88 @@
         </div>
         <!-- Navbar End -->
 
+
+        <!-- Modal del carrito -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartModalLabel">Carrito de Compras</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="cartItems" class="list-group">
+                            <!-- Aquí se mostrarán los productos -->
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Pagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        #cartItemCount {
+        font-size: 0.75rem;
+        padding: 0.25em 0.5em;
+        }
+        </style>
+
+<script>
+    // Productos en el carrito
+    let cart = [];
+
+    // Referencias a elementos del DOM
+    const cartItemCount = document.getElementById('cartItemCount');
+    const cartItems = document.getElementById('cartItems');
+
+    // Agregar un producto al carrito
+    function addToCart(productName) {
+        cart.push(productName);
+        updateCart();
+    }
+
+    // Eliminar un producto del carrito
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    // Actualizar el carrito y el contador
+    function updateCart() {
+        // Actualizar el número de productos
+        cartItemCount.textContent = cart.length;
+
+        // Actualizar la lista de productos en el modal
+        cartItems.innerHTML = '';
+        cart.forEach((product, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            listItem.textContent = product;
+
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-danger btn-sm';
+            removeButton.textContent = 'Eliminar';
+            removeButton.onclick = () => removeFromCart(index);
+
+            listItem.appendChild(removeButton);
+            cartItems.appendChild(listItem);
+        });
+    }
+
+    // Simulación: Agregar un producto al carrito
+    document.addEventListener('DOMContentLoaded', () => {
+        // Agregar un producto al hacer clic en el botón (simulado)
+        document.body.addEventListener('click', function (event) {
+            if (event.target.matches('.add-to-cart')) {
+                const productName = event.target.getAttribute('data-product');
+                addToCart(productName);
+            }
+        });
+    });
+</script>
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
@@ -118,112 +203,50 @@
                             </button>
                         </div>
                                 
-                        <!-- Carrusel de productos -->
+                       <!-- Carrusel de productos -->
                         <div class="owl-carousel productos-carousel justify-content-center">
                             {% for producto in productos %}
-                            <div class="card fixed-card-size border border-success rounded position-relative vesitable-item d-flex flex-column">
-                                <!-- Imagen del producto -->
-                                <div class="vesitable-img">
-                                    <img src="data:image/jpeg;base64,{{ producto.imagen_base64 }}" class="img-fluid" alt="{{ producto.nombre_producto }}" />
-                                </div>
-                                {% if producto.oferta_producto %}
-                                <!-- Etiqueta de oferta -->
-                                <div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                                    Oferta
-                                </div>
-                                {% endif %}
-                                <!-- Contenido -->
-                                <div class="p-4 rounded-bottom d-flex flex-column flex-grow-1">
-                                    <h5 class="text-dark">{{ producto.nombre_producto }}</h5>
-                                    <p class="descripcion-producto text-muted flex-grow-1">{{ producto.descripcion_producto }}</p>
-                                    <h6 class="descripcion-producto text-muted">Marca: Delamarca</h6>
-                                    <!-- Precio y botón al final -->
-                                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                                        <p class="text-primary fs-5 fw-bold mb-2 text-center">${{ producto.precio_producto }}</p>
+                            <a href="{{ url_for('detalle_producto', producto_id=producto.id_producto) }}" class="text-decoration-none">
+                                <div class="card fixed-card-size border border-success rounded position-relative vesitable-item d-flex flex-column">
+                                    <!-- Imagen del producto -->
+                                    <div class="vesitable-img">
+                                        <img src="data:image/jpeg;base64,{{ producto.imagen_base64 }}" class="img-fluid" alt="{{ producto.nombre_producto }}" />
+                                    </div>
+                                    {% if producto.oferta_producto %}
+                                    <!-- Etiqueta de oferta -->
+                                    <div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
+                                        Oferta
+                                    </div>
+                                    {% endif %}
+                                    <!-- Contenido -->
+                                    <div class="p-4 rounded-bottom d-flex flex-column flex-grow-1">
+                                        <h5 class="text-dark">{{ producto.nombre_producto }}</h5>
+                                        <p class="descripcion-producto text-muted flex-grow-1">{{ producto.descripcion_producto }}</p>
+                                        <h6 class="descripcion-producto text-muted">Marca: Delamarca</h6>
+                                        <!-- Precio y botón al final -->
+                                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                                            <p class="text-primary fs-5 fw-bold mb-2 text-center">${{ producto.precio_producto }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             {% endfor %}
                         </div>
-                    </div>
 
-        <!-- Contenedor principal -->
-        <div class="row g-4">
-            <!-- Barra de filtros -->
-            <div class="col-lg-3">
-                <div class="filter-section p-4 bg-light rounded shadow-sm">
-                    <h4 class="mb-4 text-primary">Filtrar Productos</h4>
-                    
-                    <!-- Categorías -->
-                    <div class="mb-4">
-                        <h5 class="mb-3 fw-bold text-secondary">Categorías</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Medicamentos (3)</a></li>
-                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Equipos Médicos (5)</a></li>
-                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Cuidado Personal (2)</a></li>
-                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Prevención (8)</a></li>
-                            <li><a href="#" class="text-dark"><i class="fas fa-tag me-2"></i>Nutrición y Bienestar (5)</a></li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Rango de precios -->
-                    <div class="mb-4">
-                        <h5 class="mb-3 fw-bold text-secondary">Precio</h5>
-                        <label for="minPrice" class="form-label">Mínimo</label>
-                        <input type="number" class="form-control mb-2" id="minPrice" placeholder="0">
-                        <label for="maxPrice" class="form-label">Máximo</label>
-                        <input type="number" class="form-control" id="maxPrice" placeholder="500">
-                        <button class="btn btn-primary mt-3 w-100">Aplicar</button>
-                    </div>
-                    
-                    <!-- Marcas -->
-                    <div class="mb-4">
-                        <h5 class="mb-3 fw-bold text-secondary">Marcas</h5>
-                        <ul class="list-unstyled">
-                            <li><input type="checkbox" id="brand1"> <label for="brand1" class="ms-2">Casio (10)</label></li>
-                            <li><input type="checkbox" id="brand2"> <label for="brand2" class="ms-2">Rolex (7)</label></li>
-                            <li><input type="checkbox" id="brand3"> <label for="brand3" class="ms-2">Fossil (5)</label></li>
-                            <li><input type="checkbox" id="brand4"> <label for="brand4" class="ms-2">Seiko (3)</label></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
+            <!-- Botón para agregar productos (Simulación) -->
+            <button class="btn btn-primary add-to-cart" data-product="Producto 1">Agregar Producto 1</button>
+            <button class="btn btn-primary add-to-cart" data-product="Producto 2">Agregar Producto 2</button>
 
-            <!-- Productos -->
-            <div class="col-lg-9">
-                <div class="row g-4">
-                    {% for producto in productos %}
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card shadow-sm border-primary rounded">
-                            <!-- Imagen del producto -->
-                            <img src="data:image/jpeg;base64,{{ producto.imagen_base64 }}" class="card-img-top img-fluid rounded-top" alt="{{ producto.nombre_producto }}">
-                            
-                            <!-- Etiqueta de oferta -->
-                            {% if producto.oferta_producto %}
-                            <div class="badge bg-danger text-white position-absolute top-0 end-0 m-2 px-3 py-2">
-                                Oferta
-                            </div>
-                            {% endif %}
-                            
-                            <!-- Contenido -->
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">{{ producto.nombre_producto }}</h5>
-                                <p class="card-text text-muted small">{{ producto.descripcion_producto }}</p>
-                                <h6 class="text-muted">Marca: {{ producto.marca or "Sin marca" }}</h6>
-                                <p class="text-success fw-bold fs-5">${{ producto.precio_producto }}</p>
-                            </div>
-                        </div>
+
+    
+                
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
         <!-- Prodcutos End-->
 
-        
 
         <!-- Footer Start -->
         <div class="container-fluid text-white-50 footer pt-3 mt-5"style="background-color: #00162A">
@@ -280,29 +303,17 @@
         </div>
         <!-- Footer End -->
 
-        <!-- Copyright Start -->
-        <div class="container-fluid copyright py-4" style="background-color: #00101E;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light">
-                            <a href="#"><i class="fas fa-copyright text-light me-2"></i>Famco</a>, Todos los derechos reservados
-                        </span>
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-end text-white">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By
-                        <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                        <a class="border-bottom" href="https://edgecloud.com.mx">/ Edge & Cloud</a>
-                    </div>
-                </div>
+          <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4 text-center" style="background-color: #00101E;">
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+                <span class="text-light">
+                    <a href="index.html">
+                        <i class="fas fa-copyright text-light me-2"></i>Famco
+                    </a>, Todos los derechos reservados
+                </span>
             </div>
         </div>
         <!-- Copyright End -->
-
-
 
         <!-- Back to Top -->
         <a href="#top" class="btn border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>

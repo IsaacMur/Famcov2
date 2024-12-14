@@ -1,7 +1,7 @@
 class ProductCQRS:
     def __init__(self, product_dao):
         self.product_dao = product_dao
-
+        
     # Metodo para INSERTAR productos
     def insert_product_command(self, nombre, precio, descripcion, codigo, stock, info, imagen, oferta, categoria_id):
         return self.product_dao.insert_product(nombre, precio, descripcion, codigo, stock, info, imagen, oferta, categoria_id)
@@ -47,3 +47,6 @@ class ProductCQRS:
             categoria=filtros.get('categoria'),
             orden=orden
         )
+
+    def get_product_by_id(self, producto_id):
+        return self.product_dao.get_product_by_id(producto_id)

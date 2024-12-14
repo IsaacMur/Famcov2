@@ -171,3 +171,9 @@ class ProductDAO:
         productos = cursor.fetchall()
         cursor.close()
         return productos
+    
+    def get_product_by_id(self, producto_id):
+        cursor = self.db_connection.cursor()
+        query = "SELECT * FROM productos WHERE id_producto = %s"
+        cursor.execute(query, (producto_id,))
+        return cursor.fetchone()

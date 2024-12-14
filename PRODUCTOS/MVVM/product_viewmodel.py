@@ -66,3 +66,5 @@ class ProductViewModel:
         }
         return self.product_cqrs.get_filtered_products(filtros_mapeados, orden)
    
+    def get_product_by_id(self, producto_id):
+        return self.product_cqrs.get_product_by_id(producto_id)

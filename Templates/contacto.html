@@ -78,8 +78,11 @@
                                 <a href="{{ url_for('contacto') }}" class="nav-item nav-link active me-5">Contacto</a>
                             </div>
                             <div class="d-flex m-3 me-0">
-                                <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                    <i class="fas fa-search" style="color: #023e72;"></i>
+                                <button class="btn-search btn border btn-md-square rounded-circle bg-white me-4 position-relative" style="color: #023e72;" data-bs-toggle="modal" data-bs-target="#cartModal">
+                                    <i class="fa-solid fa-cart-shopping" style="color: #023e72;"></i>
+                                    <span id="cartItemCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        0
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -242,23 +245,13 @@
         <!-- Footer End -->
 
         <!-- Copyright Start -->
-        <div class="container-fluid copyright py-4" style="background-color: #00101E;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light">
-                            <a href="#"><i class="fas fa-copyright text-light me-2"></i>Famco</a>, Todos los derechos reservados
-                        </span>
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-end text-white">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By
-                        <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                        <a class="border-bottom" href="https://edgecloud.com.mx">/ Edge & Cloud</a>
-                    </div>
-                </div>
+        <div class="container-fluid copyright py-4 text-center" style="background-color: #00101E;">
+            <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+                <span class="text-light">
+                    <a href="index.html">
+                        <i class="fas fa-copyright text-light me-2"></i>Famco
+                    </a>, Todos los derechos reservados
+                </span>
             </div>
         </div>
         <!-- Copyright End -->

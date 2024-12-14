@@ -50,19 +50,26 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Error en la solicitud:", error));
     });
 
-    // Visualizador de contraseña
+    // Funcion del ojo para ver contraseña
+    window.onload = function () {
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+        toggleIcon.classList.add('fa-eye-slash');
+    };
+    
     window.togglePasswordVisibility = function () {
         const passwordField = document.getElementById('password');
         const toggleIcon = document.getElementById('togglePasswordIcon');
-
+    
         if (passwordField.type === 'password') {
+            // Cambiar a texto y mostrar ícono de ojo abierto
             passwordField.type = 'text';
-            toggleIcon.classList.remove('fa-eye');
-            toggleIcon.classList.add('fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
             toggleIcon.classList.remove('fa-eye-slash');
             toggleIcon.classList.add('fa-eye');
+        } else {
+            // Cambiar a contraseña y mostrar ícono de ojo cerrado
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
         }
     };
 });
