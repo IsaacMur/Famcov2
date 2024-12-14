@@ -11,12 +11,13 @@ $(document).ready(function () {
         "language": {
             "search": "Buscar:",
             "paginate": {
-                "next": "Siguiente",
-                "previous": "Anterior"
+                "next": '<i class="fas fa-arrow-right"></i>',
+                "previous": '<i class="fas fa-arrow-left"></i>'
             }
         }
     });
 });
+
 
 // Función para mostrar u ocultar el menú desplegable
 function toggleDropdown() {

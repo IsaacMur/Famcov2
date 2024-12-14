@@ -14,16 +14,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>    
+  
     <nav class="navbar navbar-light fixed-top">
         <div class="container-fluid">
             <a href="{{ url_for('index') }}" class="ms-2 btn align-items-center" style="background-color: #03A65A ; color: white;">
-                <i class="fa fa-sign-out-alt me-2"></i> Inicio
+                <i class="fa fa-house me-2"></i> Inicio
             </a>
-        </div>
+        </div> 
     </nav>    
-
+    
     <div class="login-container">
-        <h1>LOGIN</h1>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo_famco.png') }}" style="width: 150px; margin-bottom: 40px;">
+        </a>
+        
+        <h1>Login</h1>
         <form id="loginForm">
             <div class="mb-3">
                 <input type="text" class="form-control" placeholder="Usuario" id="username">

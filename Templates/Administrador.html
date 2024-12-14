@@ -16,23 +16,26 @@
 <body>
 
     <!-- Header -->
-    <div class="header">
-        <div class="title">
-            <i class="fas fa-boxes"></i> Administración
-        </div>
-        <div class="user-menu" onclick="toggleDropdown()">
-            <span>
-                <i class="fas fa-user"></i> Bienvenido, {{ session['username'] }} <i class="fas fa-caret-down"></i>
-            </span>            
-            <div class="dropdown-menu">
-                <a href="#" onclick="logout()">Cerrar Sesión</a>
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-boxes"></i> Administración
             </div>
-        </div>        
-    </div>
+            <div class="user-menu" onclick="toggleDropdown()">
+                <span>
+                    <i class="fas fa-user"></i> Bienvenido, {{ session['username'] }} <i class="fas fa-caret-down"></i>
+                </span>            
+                <div class="dropdown-menu">
+                    <a href="#" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </div>        
+        </div>
+
  
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Productos</h2>
+            <h2><strong>Productos</strong></h2>
             <!-- Botón para abrir el modal de registro de producto -->
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
                 <i class="fas fa-plus"></i> Agregar Producto

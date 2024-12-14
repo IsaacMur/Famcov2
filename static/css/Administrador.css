@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f0f0f0d8;
     margin: 0;
 }
 
@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid #004d27;
+    border-bottom: 2.5px solid #004d27;
 }
 
 .header .title {
@@ -87,7 +87,7 @@ body {
 
 .form-control {
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #b8b8b8;
     padding: 10px;
 }
 
@@ -117,6 +117,19 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 65px; /* Ajusta según tus necesidades */
+}
+
+
+/* Botones de paginación */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 6px 12px;
+    margin: 0 2px;
+    background-color: #03A65A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 /* Media Query para dispositivos móviles */
@@ -177,3 +190,4 @@ body {
         font-size: 0.8em;
     }
 }
+
